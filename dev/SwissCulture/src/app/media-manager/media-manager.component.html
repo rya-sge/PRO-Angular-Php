@@ -1,0 +1,11 @@
+<div class="mediaManagerContainer">
+  <div class="add">
+    <div class="mat-title">Ajouter des images</div>
+    <app-upload-img></app-upload-img>
+  </div>
+  <mat-grid-list cols="5" rowHeight="4:2">
+    <mat-grid-tile *ngFor="let image of album; let i=index">
+      <img style="height: 100px" [src]="image.pathImg" (click)="openDialog(image.idImg)" />
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

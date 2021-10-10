@@ -1,0 +1,79 @@
+<!--<div class="container" *ngIf="ready else Wait">-->
+<div class="container">
+  <!-- Infos du compte-->
+    <h1>Mon compte</h1>
+    <mat-list id="infosBox">
+      <mat-list-item>
+        <h2>Nom d'utilisateur:</h2>
+        <p>{{this.securityObject.username}}</p>
+      </mat-list-item>
+      <mat-list-item>
+        <h2>Type de compte:</h2>
+        <p>{{getTypeCompte()}}</p>
+      </mat-list-item>
+      <div *ngIf="securityObject.isInstitution; else privateUser">
+        <mat-list-item>
+          <h2>Etat du compte</h2>
+          <p *ngIf="securityObject.isValid != '0'" style="color:green">Validé</p>
+          <div *ngIf="securityObject.isValid == '0'">
+            <p class="inline" style="color:red">Non validé </p>
+            <mat-icon id="helpRemplirForm" class="inline" matTooltip="Demandez la validation en remplissant le formulaire ci-dessous">
+              help
+            </mat-icon>
+          </div>
+        </mat-list-item>
+      </div>
+    </mat-list>
+
+  <!-- Si l'utilisateur est une institution -->
+  <div *ngIf="securityObject.isInstitution">
+    <!-- IMPORTANT: cette ligne cause une erreur dans la console, mais on n'a pas trouvé d'autre moyen pour recharger l'institution lorsque on fait f5 -->
+    <div *ngIf="!loaded">{{init()}}</div>
+    <div *ngIf="this.institutionObject">
+<!--  <div *ngIf="securityObject.isInstitution && this.institutionObject">-->
+    <!-- Informations de l'institution-->
+    <div *ngIf="institutionObject != null && this.watermark != null">
+      <h1>Informations de l'institution</h1>
+      <div *ngIf="securityObject.isValid == '0'" id="warningNotValid">Les informations suivantes ont été enregistrées, mais n'ont pas encore été validées</div>
+      <mat-list>
+        <mat-list-item><h2>Nom: </h2><p>{{institutionObject.nom}}</p></mat-list-item>
+        <mat-list-item><h2>Domaine</h2><p>{{institutionObject.domaine}}</p></mat-list-item>
+        <mat-list-item><h2>Lien: </h2><a href="{{this.institutionObject.url}}">{{institutionObject.url}}</a></mat-list-item>
+        <mat-list-item><h2>Adresse</h2><p *ngIf="this.institutionObject.rue">{{address}}</p></mat-list-item>
+        <mat-list-item><h2>Image de profil: </h2><a href="{{this.imgProfil}}"><img class="thumbnail" src="{{this.imgProfil}}" alt="Image de profil"/></a></mat-list-item>
+        <mat-list-item><div><h2>Description: </h2><p>{{institutionObject.description}}</p></div></mat-list-item>
+        <mat-list-item><div><h2>Filigrane:</h2>
+          <p *ngIf="watermark.type == 0">{{watermark.texte}}</p>
+          <img *ngIf="watermark.type == 1" src="{{imgWatermark}}" class="thumbnail" alt="Image du filigrane"/>
+          <p *ngIf="watermark.type >= 3">Désactivé</p>
+        </div></mat-list-item>
+      </mat-list>
+      <!-- Modification des infos -->
+      <h1>Modifier l'institution</h1>
+      <app-institution-prive [institutionObject]="this.institutionObject" [watermark]="this.watermark"></app-institution-prive>
+    </div>
+
+    <hr class="mat-line"/>
+    <!-- Suppression du compte -->
+    <div id="supprimerCompteInstitution">
+      <button mat-button color="warn" matTooltip="Pour supprimer un compte Institution,veuillez faire une demande auprès de nos administrateurs" disabled>
+        Supprimer le compte
+      </button>
+    </div>
+  </div>
+  </div>
+</div>
+
+<ng-template #privateUser>
+  <p id="changementCompteMsg">Vous êtes une institution ? <button mat-button (click)="becomeInstitutionDialog()" >Faites une demande ici !</button></p>
+
+  <div id="supprimerCompte">
+    <button mat-button color="warn" (click)="delCompteDialog()">Supprimer le compte</button>
+  </div>
+</ng-template>
+
+<ng-template #Wait>
+  <div class="container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

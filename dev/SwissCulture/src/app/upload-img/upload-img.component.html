@@ -1,0 +1,35 @@
+<!--
+Date de création     : 27.03.2021
+Dernier contributeur : Dylan Canton
+Groupe               : PRO-A-07
+Description          : Fichier HTML du composant d'upload d'image
+Remarque             : -
+Sources              : -
+-->
+
+<!--Input classique pour l'upload-->
+<input type="file" class="file-input"
+       (change)="onFileSelected($event)" #fileUpload multiple>
+
+<!--
+Pour permettre de modifier le rendu du bouton d'upload, on utilise une autre div
+qui, lors du click, renvoie vers l'input
+-->
+<div class="file-upload">
+  {{fileName || "Ajouter des fichiers"}}
+
+  <button mat-fab color="primary" class="upload-btn"
+          (click)="fileUpload.click()">
+    <mat-icon>photo</mat-icon>
+  </button>
+
+  <p>Formats de fichiers autorisés :
+    <ng-container *ngFor="let ext of validExtensions; let last = last">
+      <span>{{ext}} </span>
+    </ng-container>
+  </p>
+  <p>Taille max: 20 Mo</p>
+
+  <p style="color:red" [hidden]="validExt">Erreur : Certains fichiers ont un format incorrect</p>
+  <div *ngIf="msg" [style.color]="isErrorMsg ? 'red' : 'green'" >{{msg}}</div>
+</div>

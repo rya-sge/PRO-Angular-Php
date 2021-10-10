@@ -1,0 +1,34 @@
+<div class="image"></div>
+
+<div class="trendBox">
+  <h2>Institutions populaires <a [routerLink]="['/list-institution']"><mat-icon class="icon">view_comfy</mat-icon></a></h2>
+  <mat-grid-list [cols]="colSize" rowHeight="4:2" [gutterSize]="'5%'" (window:resize)="onResize($event)">
+    <a *ngFor="let institution of institutionList" [routerLink]="['/institution',institution.id]">
+      <mat-grid-tile
+        class="vignette">{{ institution.name }}
+      </mat-grid-tile>
+    </a>
+  </mat-grid-list>
+</div>
+
+<div class="discoveryBox">
+  <h2>Visites à découvrir<a [routerLink]="['/list-visit']"><mat-icon class="icon">view_comfy</mat-icon></a></h2>
+  <mat-grid-list [cols]="colSize" rowHeight="4:2" [gutterSize]="'5%'" (window:resize)="onResize($event)">
+    <a *ngFor="let visit of visitList" [routerLink]="['/visite',visit.id]">
+      <mat-grid-tile
+        class="vignette">{{ visit.name }}
+      </mat-grid-tile></a>
+  </mat-grid-list>
+</div>
+
+<div class="categoryBox">
+  <h2>Catégories</h2>
+  <mat-grid-list [cols]="categoryColSize" rowHeight="4:3" [gutterSize]="'5%'" (window:resize)="onResize($event)">
+    <a *ngFor="let category of categoryList" [routerLink]="['/category-visit',category.id]">
+      <mat-grid-tile
+         class="vignette">{{ category.name }}
+      </mat-grid-tile></a>
+  </mat-grid-list>
+</div>
+
+

@@ -1,0 +1,111 @@
+<!-- Message indiquant s'il y a eu une erreur -->
+<div [class.mat-error]="postError" *ngIf="postMsg">{{postMsg}}</div>
+
+  <div class="container" *ngIf="this.ready&&this.securityObject.isAuthenticated&&this.securityObject.isInstitution; else Wait">
+  <mat-tab-group>
+    <mat-tab label="Modifier mes informations">
+      <div class="choice" *ngIf="formGroup.get('watermark').get('type').value == 1">
+        <div class="mat-title">Image du filigrane:</div>
+        <app-upload-img isWatermark="true"></app-upload-img>
+      </div>
+      <div class="choice">
+        <div class="mat-title">Image de profil</div>
+        <app-upload-img isProfile="true"></app-upload-img>
+      </div>
+      <form [formGroup]="formGroup" (ngSubmit)="submitInstitution(formGroup.value)" class="form">
+        <!-- Nom -->
+        <mat-form-field class="form-element">
+          <mat-label>Nom du profil</mat-label>
+          <input matInput formControlName="nom">
+        </mat-form-field>
+        <!-- Domaine (liste déroulante) -->
+        <mat-form-field class="form-element">
+          <mat-label>Domaine</mat-label>
+          <mat-select formControlName="domaine" [(value)]="this.institutionObject.domaine">
+            <mat-option></mat-option>
+            <mat-option *ngFor="let option of domains" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- Site web -->
+        <mat-form-field class="form-element">
+          <mat-label>Site web</mat-label>
+          <input matInput formControlName="url">
+        </mat-form-field>
+
+        <!-- Adresse -->
+        <div formGroupName="adresse">
+          <div>
+            <!-- NPA -->
+            <mat-form-field id="npa" class="form-element, inline">
+              <mat-label>NPA</mat-label>
+              <input matInput formControlName="npa">
+            </mat-form-field>
+            <!-- Ville -->
+            <mat-form-field id="ville" class="form-element, inline" >
+              <mat-label>Ville</mat-label>
+              <input matInput formControlName="ville" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredCities | async" [value]="option">
+                  {{getNpa(option)}} {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+          </div>
+
+          <!-- Rue -->
+          <mat-form-field class="form-element">
+            <mat-label>Rue</mat-label>
+            <input matInput formControlName="rue">
+          </mat-form-field>
+        </div>
+
+        <!-- Description -->
+        <mat-form-field class="form-element">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <div formGroupName="watermark">
+          <mat-form-field class="form-element">
+            <mat-label>Activer un filigrane sur mes images</mat-label>
+            <mat-hint>Les effets ne s'appliqueront que sur vos nouvelles images</mat-hint>
+            <mat-select formControlName="type" value="3">
+              <mat-option value="3">Désactiver</mat-option>
+              <mat-option value="0">Texte</mat-option>
+              <mat-option value="1">Image</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Watermark texte -->
+          <div *ngIf="formGroup.get('watermark').get('type').value == 0">
+            <mat-form-field class="form-element">
+              <mat-label>Texte du filigrane</mat-label>
+              <mat-hint>Max 255 caractères</mat-hint>
+              <input matInput formControlName="texte" >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Envoyer (désactivé si on n'a pas fait de modif ou qu'un champ n'est pas valide) -->
+        <div class="form-element">
+          <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid || !formGroup.touched">
+            Envoyer
+          </button>
+        </div>
+      </form>
+    </mat-tab>
+    <mat-tab label="Mes visites">
+      <p class="mat-error" *ngIf="this.securityObject.isValid != 1">Vous pourrez ajouter des visites lorsque votre compte sera validé</p>
+      <app-visit-list-instit></app-visit-list-instit>
+    </mat-tab>
+    <mat-tab label="Créer une visite" *ngIf="this.securityObject.isValid == 1"><app-visit-creation></app-visit-creation></mat-tab>
+  </mat-tab-group>
+</div>
+
+<ng-template #Wait>
+  <div class="container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

@@ -1,0 +1,11 @@
+<div class="container">
+  <h2>Institutions disponibles</h2>
+
+  <a *ngFor="let institution of institutionsList" [routerLink]="['/institution',institution.id]">
+    <mat-card class="visitCard">
+      <mat-card-header>
+        <mat-card-title>{{institution.description}}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  </a>
+</div>

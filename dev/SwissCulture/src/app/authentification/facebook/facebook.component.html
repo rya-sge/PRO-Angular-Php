@@ -1,0 +1,42 @@
+<!--
+Source utilisée pour la création du html :
+Ajouter un login facebook :
+https://stackblitz.com/edit/angular-material-google-social-login?file=src%2Fapp%2Fapp.component.html
+
+Code d'exemple proposé par Material :
+https://material.angular.io/components/card/examples
+ -->
+<mat-card class="card-block" *ngIf="user">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Information</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p class="card-text">L'authentification avec {{ user.provider }} a réussie avec le compte suivant : </p>
+    <p class="card-title">{{ user.name }} / {{ user.email }} </p>
+    </mat-card-content>
+  <mat-card-content
+       *ngIf="securityObject &&
+           !securityObject.isAuthenticated">
+    <p>L'authentification sur le site web a malheureusement échouée.</p>
+  </mat-card-content>
+    <mat-card-content
+       *ngIf="securityObject &&
+           securityObject.isAuthenticated">
+    <p>Vous êtes connecté en tant que {{securityObject.username}}. </p>
+      <p *ngIf="securityObject.isInstitution && securityObject.isValid == 0" class="mat-error">Votre institution n'est pas encore validée</p>
+  </mat-card-content>
+</mat-card>
+<br/>
+<div style="display: flex; align-items: center; justify-content:center; ">
+  <h3>Connectez-vous avec Facebook</h3>
+</div>
+<div style="height: 10rem; display: flex; align-items: center; justify-content:center;">
+
+  <button (click)="signInWithFB()" mat-button style="padding: 1rem;" color="facebook">
+    <mat-icon  style="width: 50px; height:20px;">facebook</mat-icon> Login With Facebook
+  </button>
+
+</div>
+
+

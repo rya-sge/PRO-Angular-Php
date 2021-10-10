@@ -1,0 +1,73 @@
+<h1>Modifier une visite</h1>
+<div class="container" *ngIf="this.securityObject.isAuthenticated&&this.securityObject.isInstitution&&this.formGroupVisit; else notAuth" novalidate>
+  <form [formGroup]="formGroupVisit" (ngSubmit)="onSubmit(formGroupVisit.value)" class="form">
+    <!-- Titre -->
+    <mat-form-field class="form-element">
+      <mat-label>Titre de la visite</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field class="form-element">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <!-- Category -->
+    <mat-form-field class="form-element">
+      <mat-label>Catégories</mat-label>
+      <mat-select formControlName="categ" multiple>
+        <mat-option *ngFor="let option of categories" [value]="option.id">
+          {{option.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Visible ? -->
+    <div class="form-element">
+      <mat-checkbox formControlName="visible">Visible ?</mat-checkbox>
+    </div>
+
+    <div class="form-element">
+      <button mat-raised-button color="accent" type="submit" class="button" [disabled]="!formGroupVisit.valid || !formGroupVisit.touched">Envoyer</button>
+      <button mat-raised-button color="warn" type="button" class="button" id="button-delete" (click)="deleteVisit()">Supprimer visite</button>
+    </div>
+  </form>
+
+  <form class="form">
+    <div class="mat-title">Ajouter des images</div>
+    <button mat-raised-button color="accent" class="button" (click)="openDialog()">Ajouter</button>
+  </form>
+</div>
+<div *ngIf="pictures && pictures.length > 0">
+  <div class="mat-title">Images dans la visite</div>
+    <div class="container" *ngIf="this.securityObject.isAuthenticated&&this.securityObject.isInstitution; else notAuth">
+      <table mat-table [dataSource]="pictures" class="mat-elevation-z8">
+
+        <!-- Image -->
+        <ng-container matColumnDef="picture">
+          <th mat-header-cell *matHeaderCellDef> Image </th>
+          <td mat-cell *matCellDef="let element"> <img width="20%" src="{{ element.nomFichier }}"></td>
+        </ng-container>
+
+        <!-- Delete button -->
+        <ng-container matColumnDef="deleteButton">
+          <th mat-header-cell *matHeaderCellDef> Supprimer </th>
+          <td mat-cell *matCellDef="let element" style="width:20%">
+            <button mat-icon-button color="primary" (click)="deletePicture(element.idMedia)" title="Visiter"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+    </div>
+</div>
+
+
+<ng-template #notAuth>
+  <div class="container">
+    <mat-h1>Vous n'êtes pas connecté ou n'êtes pas une institution</mat-h1>
+  </div>
+</ng-template>

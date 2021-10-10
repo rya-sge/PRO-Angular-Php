@@ -1,0 +1,35 @@
+<!--
+* Date de création : 13.05.2021
+* Dernier contributeur : Quentin Le Ray
+* Groupe : PRO-A-07
+* Description : Fichier de front-end pour l'affichage de la liste des visites
+* Source : https://v11.material.angular.io/components/table
+https://careydevelopment.us/blog/angular-material-how-to-add-clickable-icons-to-rows-in-a-table
+-->
+
+<h2>Liste des visites</h2>
+<table mat-table [dataSource]="visits" class="mat-elevation-z8">
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Titre </th>
+    <td mat-cell *matCellDef="let element"> {{element.titre}} </td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <!-- view Column -->
+  <ng-container matColumnDef="viewButton">
+    <th mat-header-cell *matHeaderCellDef> Visiter </th>
+    <td mat-cell *matCellDef="let row" style="width:20%">
+      <button mat-icon-button color="primary" routerLink="/visite/{{row.id}}" title="Visiter"><mat-icon>preview</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

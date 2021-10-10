@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Passer à un compte d'Institution</h2>
+<p>Veuillez lire les conditions d'utilisation. Après la création du compte, vous devrez remplir vos informations dans votre profil. Il devra être validé avant de pouvoir l'utiliser normalement</p>
+
+<mat-dialog-content class="mat-typography">
+  <app-terms-of-use></app-terms-of-use>
+  <mat-dialog-actions align="end" style="margin-top: 100px;">
+    <button mat-raised-button [mat-dialog-close]="true" color="accent">Accepter les conditions et créer mon compte Institution</button>
+  </mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Annuler</button>
+</mat-dialog-actions>
+

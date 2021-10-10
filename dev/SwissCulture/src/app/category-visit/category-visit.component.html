@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Visites disponibles</h2>
+
+  <a *ngFor="let visit of visitList" [routerLink]="['/visite',visit.id]">
+    <mat-card class="visitCard">
+       <mat-card-header>
+         <mat-card-title>{{visit.title}}</mat-card-title>
+       </mat-card-header>
+       <mat-card-content>
+         <p>{{visit.description}}</p>
+       </mat-card-content>
+    </mat-card>
+  </a>
+</div>

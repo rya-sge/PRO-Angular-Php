@@ -1,0 +1,48 @@
+.container {
+  padding: 10px;
+}
+
+.inline {
+  display: inline;
+}
+
+h2 {
+  font-size : 16px;
+  color: darkred;
+  width: 150px;
+}
+
+mat-list-item{
+  height: auto !important;
+}
+
+#helpRemplirForm {
+  font-size: 16px;
+}
+
+#changementCompteMsg {
+  border: 1px darkred solid;
+  color: darkred;
+  font-weight: lighter;
+  padding: 10px;
+  max-width: max-content;
+  float:right;
+
+}
+
+#supprimerCompte {
+  margin-top: 100px;
+  max-width: max-content;
+  text-align: center;
+}
+
+.thumbnail {
+  height: 100px;
+}
+
+#warningNotValid {
+  font-size: 20px;
+  font-weight: lighter;
+  color:red;
+  vertical-align: before-edge;
+}

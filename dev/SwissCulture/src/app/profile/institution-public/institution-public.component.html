@@ -1,0 +1,33 @@
+<div class="container" *ngIf="institutObject && categories">
+  <img id="profileImageMobile" src="{{this.profileImg}}" alt="Image de profil" *ngIf="this.mobile"/>
+  <div id="presentation">
+    <div id="info">
+      <h1 class="mat-h1" id="titre">{{this.institutObject.nom}}</h1>
+      <div>
+        <h2 class="inline">Site web: </h2>
+        <a class="inline" [href]="this.institutObject.url" >{{this.institutObject.url}}</a>
+      </div>
+      <div>
+        <h2 class="inline">Adresse: </h2>
+        <p class="inline" *ngIf="address">{{this.address}}</p>
+      </div>
+      <div>
+        <h2 class="inline">Domaine: </h2>
+        <p class="inline">{{this.institutObject.domaine}}</p>
+      </div>
+      <div>
+        <h2 class="inline">Catégorie(s): </h2>
+        <div class="inline"><div *ngFor="let cat of categories">{{cat}}</div></div>
+      </div>
+      <div>
+        <h2 class="inline">Présentation: </h2>
+        <p>{{this.institutObject.description}}</p>
+      </div>
+    </div>
+    <img id="profileImageDesktop" src="{{this.profileImg}}" alt="Image de profil" *ngIf="!this.mobile"/>
+  </div>
+  <div id="contenu">
+    <h1>Visites</h1>
+    <app-visit-list-public [idInstitution]="this.idInstitution"></app-visit-list-public>
+  </div>
+</div>

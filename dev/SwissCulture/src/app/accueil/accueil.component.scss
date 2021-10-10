@@ -1,0 +1,25 @@
+.image{
+  padding-bottom: 30%;
+  background-repeat:no-repeat;
+  background-position: center;
+  background-image:url(../../assets/home/home.jpg);
+  background-size: cover;
+}
+
+.trendBox, .discoveryBox, .categoryBox{
+  margin: 10%;
+}
+
+.vignette{
+  margin-right: 50px;
+  background-color: #4fc3f7;
+}
+
+.icon{
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+a{
+  color: inherit;
+}

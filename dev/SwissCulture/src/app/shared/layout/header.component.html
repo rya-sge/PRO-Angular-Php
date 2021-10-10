@@ -1,0 +1,36 @@
+<mat-toolbar id="header">
+  <!-- Menu à gauche -->
+  <div id="gauche">
+      <button mat-icon-button (click)="onToggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    <!-- Titre/Logo du site-->
+    <a id="logo" [class.center]="mobile " routerLink="/accueil">Swiss Culture</a>
+  </div>
+
+  <!-- Titre de la page (au milieu)-->
+  <div *ngIf="!mobile" id="pagetitle" class="center">{{title}}</div>
+
+  <!-- Gestion de l'utilisateur (à droite si Desktop) -->
+  <div id="droite">
+    <a *ngIf="!mobile && !securityObject.isAuthenticated" class="userbuttons" routerLink="/login" >Se connecter</a>
+    <button *ngIf="!mobile && securityObject.isAuthenticated" mat-flat-button class="userbuttons" [matMenuTriggerFor]="menu" >
+      {{securityObject.username}}
+      <mat-icon *ngIf="securityObject.isInstitution">business</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/profil">
+        <mat-icon>person</mat-icon>
+        <span>Mon profil</span>
+      </button>
+      <button mat-menu-item routerLink="/mediaManager" *ngIf="this.securityObject.isInstitution">
+        <mat-icon>collections</mat-icon>
+        <span>Ma galerie</span>
+      </button>
+      <button mat-menu-item (click)="logout()" >
+        <mat-icon>logout</mat-icon>
+        <span>Se déconnecter</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

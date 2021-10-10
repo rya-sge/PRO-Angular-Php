@@ -1,0 +1,1 @@
+<?php echo "Ceci est la page du backend du projet swissculture, si vous voyez cette page c'ets pas normal"; ?>

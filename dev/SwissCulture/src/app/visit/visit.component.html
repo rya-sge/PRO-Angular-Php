@@ -1,0 +1,26 @@
+<!--
+Sources utilisées :
+https://stackblitz.com/edit/angular-bkosu5?file=src%2Fapp%2Fapp.component.ts
+-->
+<div class="container">
+  <div *ngIf="!this.imageObject" class="mat-title">Cette visite est vide :(</div>
+  <div *ngIf="this.imageObject">
+    <div mat-title>Cliquez pour voir la visite:</div>
+    <div class="group-2">
+      <div>
+      <img *ngFor="let img of imageObject; let i = index" [src]="img.image" [alt]="img.title" (click)="showLightbox(i)" />
+      </div>
+    </div>
+
+    <!-- ng-image-fullscreen-view  -->
+    <ng-image-fullscreen-view
+      (nextImage)= increment()
+      (prevImage)= decrement()
+      [images]="imageObject"
+      [imageIndex]="currentIndex"
+      [show]="showFlag"
+      (click)="openDialog()"
+      (close)="closeEventHandler()">
+    </ng-image-fullscreen-view>
+  </div>
+</div>

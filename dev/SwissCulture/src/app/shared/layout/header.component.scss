@@ -1,0 +1,63 @@
+$titlecolor: #666666;
+
+#header {
+  background-color: #fefefe;
+  border: #dddddd solid 1px;
+}
+
+#gauche {
+  display:flex;
+  align-items: center;
+}
+
+#logo {
+  font-size: 24px;
+  color: darkred;
+  margin-right : 25px;
+  margin-left: 5px;
+}
+
+#pagetitle {
+  font-size: 32px;
+  font-style: italic;
+  text-align: center;
+  color: $titlecolor;
+}
+
+#droite {
+  display:flex;
+  align-items: center;
+}
+
+
+.mat-toolbar{
+  border-radius: 3px;
+}
+
+.mat-icon-button {
+  color: $titlecolor;
+}
+
+.center {
+  flex-grow: 2;
+  position: center;
+  text-align:center;
+}
+
+.userbuttons {
+  font-size: 15px;
+  margin-right: 5px;
+  color: darkred;
+  justify-content: center;
+}
+
+@media(max-width: 959px){
+  mat-toolbar{
+    border-radius: 0;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+

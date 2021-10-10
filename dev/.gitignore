@@ -1,0 +1,20 @@
+.idea
+SwissCulture/package-lock.json
+
+#Docker
+/dump
+docker-compose.yml
+Dockerfile
+
+#DB config
+/Backend/zone_protected/db.ini
+
+#Constantes PHP
+/Backend/constante.php
+
+#Composer
+Backend/utils/composer.lock
+Backend/utils/vendor/
+# ancienne version
+Backend/composer.lock
+Backend/vendor/

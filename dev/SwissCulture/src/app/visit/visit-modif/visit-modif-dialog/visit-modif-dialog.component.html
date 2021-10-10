@@ -1,0 +1,17 @@
+<div class="container" *ngIf="this.formGroup">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+  <mat-dialog-content>
+      <mat-grid-list cols="4">
+        <mat-grid-tile *ngFor="let image of pictures; let i = index">
+            <input type="checkbox" [id]="image.idMedia" [formControlName]="image.idMedia">
+          <label [htmlFor]="image.idMedia"><img style="height: 100px" [src]="image.nomFichier" /></label>
+        </mat-grid-tile>
+      </mat-grid-list>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="form-element">
+      <button mat-raised-button color="warn" type="submit" class="button" [disabled]="!formGroup.valid">Ajouter image(s)</button>
+    </div>
+  </mat-dialog-actions>
+  </form>
+</div>

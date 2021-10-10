@@ -1,0 +1,25 @@
+/*
+Source du css :
+https://stackblitz.com/edit/angular-bkosu5?file=src%2Fapp%2Fapp.component.ts
+ */
+.group-1,
+.group-2 {
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  display: table;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.group-1 img,
+.group-2 img {
+  cursor: pointer;
+  width: 110px;
+  height: 100px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.container {
+  margin:50px;
+}

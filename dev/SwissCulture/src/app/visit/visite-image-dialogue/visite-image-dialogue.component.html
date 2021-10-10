@@ -1,0 +1,10 @@
+<div class="description" mat-dialog-content>
+  <div dialog-title class="title">{{data.title}}</div>
+  <div *ngIf="data.description != null && data.description.length != 0">
+    <p>{{data.description}}</p>
+  </div>
+  <br/>
+  <div *ngIf="data.auteur != null && data.auteur.length != 0" class="inline">
+    <i>Par: {{data.auteur}}</i>
+  </div>
+</div>
